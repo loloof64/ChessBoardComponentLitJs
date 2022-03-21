@@ -1,13 +1,7 @@
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
 import {LitElement, html, css} from 'lit';
 
 /**
- * An example element.
+ * A chessboard component
  *
  * @fires count-changed - Indicates when the count changes
  * @slot - This element has a slot
