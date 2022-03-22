@@ -58,7 +58,7 @@ export class ChessBoard extends LitElement {
       backgroundColor: {type: String},
 
       /**
-       * The coordinates color. Defaults to yellow.
+       * The coordinates color. Defaults to orange.
        * @type {String}
        */
       coordinatesColor: {type: String},
@@ -81,7 +81,7 @@ export class ChessBoard extends LitElement {
     super();
 
     this.style.setProperty('--backgroundColor', 'pink');
-    this.style.setProperty('--coordinates-color', 'yellow');
+    this.style.setProperty('--coordinates-color', 'orange');
 
     this.style.setProperty('--white-cells-color', 'navajowhite');
     this.style.setProperty('--black-cells-color', 'peru');
