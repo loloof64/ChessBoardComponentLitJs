@@ -16,15 +16,17 @@
       }
     </style>
   </head>
-  <body x-data="{size: '500.30px'}">
+  <body x-data="{size: '500.30px', reversed: false}">
     <div class="main_zone">
       <loloof64-chessboard 
       :size="size"
       backgroundColor="blue"
+      :reversed="reversed"
       >
         <p>This is child content</p>
       </loloof64-chessboard>
       <button @click="size = size === '500.30px' ? '40vw' : '500.30px';">Toggle size</button>
+      <button @click="reversed = !reversed;">Toggle orientation</button>
     </div>
   </body>
 </html>
