@@ -1,4 +1,5 @@
 import {LitElement, html, css} from 'lit';
+import {classMap} from 'lit/directives/class-map.js';
 
 /**
  * A chessboard component.
@@ -24,6 +25,14 @@ export class ChessBoard extends LitElement {
         align-items: center;
         color: var(--coordinates-color);
         font-size: var(--coordinates-font-size);
+      }
+
+      .white_cell {
+        background-color: var(--white-cells-color);
+      }
+
+      .black_cell {
+        background-color: var(--black-cells-color);
       }
     `;
   }
@@ -53,6 +62,18 @@ export class ChessBoard extends LitElement {
        * @type {String}
        */
       coordinatesColor: {type: String},
+
+      /**
+       * White cells color. Defaults to navajowhite.
+       * @type {String}
+       */
+      whiteCellsColor: {type: String},
+
+      /**
+       * Black cells color. Defaults to peru.
+       * @type {String}
+       */
+       blackCellsColor: {type: String},
     };
   }
 
@@ -61,6 +82,9 @@ export class ChessBoard extends LitElement {
 
     this.style.setProperty('--backgroundColor', 'pink');
     this.style.setProperty('--coordinates-color', 'yellow');
+
+    this.style.setProperty('--white-cells-color', 'navajowhite');
+    this.style.setProperty('--black-cells-color', 'peru');
 
     this.style.setProperty('--size', '100px');
     this.style.setProperty('--cells-size', '50px');
@@ -73,16 +97,22 @@ export class ChessBoard extends LitElement {
 
   }
 
+  _cell(rowIndex, colIndex) {
+    const isWhiteCell = (rowIndex + colIndex) %2 == 0;
+    const classes = {'white_cell': isWhiteCell, 'black_cell': !isWhiteCell};
+    return html`<div class=${classMap(classes)}></div>`;
+  }
+
   _rowCells(rowIndex) {
     return html`<div class="coordinate">${rowIndex}</div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
+                  ${this.reversed ? this._cell(7-rowIndex, 0) : this._cell(rowIndex, 0)}
+                  ${this.reversed ? this._cell(7-rowIndex, 1) : this._cell(rowIndex, 1)}
+                  ${this.reversed ? this._cell(7-rowIndex, 2) : this._cell(rowIndex, 2)}
+                  ${this.reversed ? this._cell(7-rowIndex, 3) : this._cell(rowIndex, 3)}
+                  ${this.reversed ? this._cell(7-rowIndex, 4) : this._cell(rowIndex, 4)}
+                  ${this.reversed ? this._cell(7-rowIndex, 5) : this._cell(rowIndex, 5)}
+                  ${this.reversed ? this._cell(7-rowIndex, 6) : this._cell(rowIndex, 6)}
+                  ${this.reversed ? this._cell(7-rowIndex, 7) : this._cell(rowIndex, 7)}
                 <div class="coordinate">${rowIndex}</div>`;
   }
 
@@ -104,8 +134,16 @@ export class ChessBoard extends LitElement {
       this.style.setProperty('--backgroundColor', this.backgroundColor);
     }
 
-    if (changes.has('coordinates-color')) {
+    if (changes.has('coordinatesColor')) {
       this.style.setProperty('--coordinates-color', this.coordinatesColor);
+    }
+
+    if (changes.has('whiteCellsColor')) {
+      this.style.setProperty('--white-cells-color', this.whiteCellsColor);
+    }
+
+    if (changes.has('blackCellsColor')) {
+      this.style.setProperty('--black-cells-color', this.blackCellsColor);
     }
   }
 
@@ -124,7 +162,7 @@ export class ChessBoard extends LitElement {
         <div></div>
 
         ${
-          (this.reversed ? [1,2,3,4,5,6,7,8] : [8,7,6,4,5,3,2,1]).map((row) => this._rowCells(row))
+          (this.reversed ? [1,2,3,4,5,6,7,8] : [8,7,6,5,4,3,2,1]).map((row) => this._rowCells(row))
         }
 
         <div></div>
