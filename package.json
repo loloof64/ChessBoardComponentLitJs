@@ -39,6 +39,7 @@
   "author": "Laurent Bernabe",
   "license": "MIT",
   "dependencies": {
+    "chess.js": "^0.12.1",
     "lit": "^2.1.0"
   },
   "devDependencies": {

@@ -52,7 +52,7 @@ export class ChessBoard extends LitElement {
       reversed: {type: Boolean},
 
       /**
-       * The background color. Defaults to pink.
+       * The background color. Defaults to gray.
        * @type {String}
        */
       backgroundColor: {type: String},
@@ -80,7 +80,7 @@ export class ChessBoard extends LitElement {
   constructor() {
     super();
 
-    this.style.setProperty('--backgroundColor', 'pink');
+    this.style.setProperty('--backgroundColor', 'gray');
     this.style.setProperty('--coordinates-color', 'orange');
 
     this.style.setProperty('--white-cells-color', 'navajowhite');
