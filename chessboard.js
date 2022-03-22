@@ -11,9 +11,10 @@ export class ChessBoard extends LitElement {
   static get styles() {
     return css`
       :host {
+        --defaultSize: 10px;
         display: inline-flex;
-        width: var(--size);
-        height: var(--size);
+        width: var(--size, var(--defaultSize));
+        height: var(--size, var(--defaultSize));
         background-color: pink;
       }
     `;
@@ -27,22 +28,6 @@ export class ChessBoard extends LitElement {
        */
       size: {type: String},
     };
-  }
-
-  constructor() {
-    super();
-    this.size = '100px';
-    this.style.setProperty('--size', `100px`);
-  }
-
-  update(changes) {
-    if (changes.has('size')) {
-      if (this.size) {
-        this.style.setProperty('--size', this.size);
-      } else {
-        this.style.removeProperty('--size');
-      }
-    }
   }
 
   render() {

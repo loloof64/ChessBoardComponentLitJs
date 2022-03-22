@@ -18,10 +18,10 @@
   </head>
   <body x-data="{size: '500px'}">
     <div class="main_zone">
-      <loloof64-chessboard :size="size">
+      <loloof64-chessboard :style="`--size: ${size};`">
         <p>This is child content</p>
       </loloof64-chessboard>
-      <button @click="size = '200px';">Change size</button>
+      <button @click="size = '10vw';">Change size</button>
     </div>
   </body>
 </html>
