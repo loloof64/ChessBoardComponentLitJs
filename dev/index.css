@@ -1,0 +1,10 @@
+.main_zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_zone loloof64-chessboard {
+    margin: 10px 0;
+}
