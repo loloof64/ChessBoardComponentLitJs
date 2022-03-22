@@ -11,12 +11,11 @@ export class ChessBoard extends LitElement {
   static get styles() {
     return css`
       :host {
-        --defaultSize: 100px;
-        --defaultBackgroundColor: pink;
         display: grid;
         width: var(--size);
         height: var(--size);
-        background-color: var(--backgroundColor, var(--defaultBackgroundColor));
+        background-color: var(--backgroundColor);
+        grid-template: var(--grid-template);
       }
     `;
   }
@@ -25,9 +24,14 @@ export class ChessBoard extends LitElement {
     return {
       /**
        * The common size width/height of the board, in whatever unit you want.
-       * @type {string}
+       * @type {String}
        */
       size: {type: String},
+      /**
+       * The background color.
+       * @type {String}
+       */
+      backgroundColor: {type: String},
     };
   }
 
@@ -41,13 +45,25 @@ export class ChessBoard extends LitElement {
       const groups = this.size.match(/([0-9\.]+)(.*)/);
       const sizeValue = parseFloat(groups[1]);
       const unit = groups[2];
-      const halfSizeValue = sizeValue / 2.0;
+      const cellsSize = sizeValue / 9.0;
+      const halfCellsSize = cellsSize / 2.0;
       this.style.setProperty('--size', this.size);
-      this.style.setProperty('--half-size', `${halfSizeValue}${unit}`);
+      this.style.setProperty('--cells-size', `${cellsSize}${unit}`);
+      this.style.setProperty('--grid-template', `${halfCellsSize}${unit} repeat(8, ${cellsSize}${unit}) ${halfCellsSize}${unit} / ${halfCellsSize}${unit} repeat(8, ${cellsSize}${unit}) ${halfCellsSize}${unit}`);
     }
     else {
       this.style.setProperty('--size', '100px');
-      this.style.setProperty('--half-size', '50px');
+      this.style.setProperty('--cells-size', '50px');
+      const cellsSize = 50 / 9.0;
+      const halfCellsSize = cellsSize / 2.0;
+      this.style.setProperty('--grid-template', `${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px / ${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px`);
+    }
+
+    if (changes.has('backgroundColor')) {
+      this.style.setProperty('--backgroundColor', this.backgroundColor);
+    }
+    else {
+      this.style.setProperty('--backgroundColor', 'blue');
     }
   }
 
