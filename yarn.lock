@@ -2856,10 +2856,10 @@ character-reference-invalid@^1.0.0:
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-1.1.4.tgz#083329cda0eae272ab3dbbf37e9a382c13af1560"
   integrity sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==
 
-chess.js@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/chess.js/-/chess.js-0.12.1.tgz#0884a771893b50b6a594164f01281a08842bdb5d"
-  integrity sha512-95PsuUCtoxPyQNB+29k54OWGeEEpuWXu+d+oWL/fcko5T5NhDuGxaYmoXcZ6KUnFKyUYxdLjwqRqCWZonRuoJQ==
+chess.mjs@^1.1.1, chess.mjs@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/chess.mjs/-/chess.mjs-1.2.0.tgz#d317bbe339b30d688e03129f9ba40c43d36b2088"
+  integrity sha512-6WLXJ0RHJSn/VjCVAOE6N8mTNXChjrN+xOTOKnpF+v94eCULyRd5KfRNLvxxmxKKxCkck9VsquPirLT0nxH4og==
 
 chokidar@3.5.2:
   version "3.5.2"
@@ -2976,6 +2976,23 @@ clone@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
+
+cm-chess@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/cm-chess/-/cm-chess-2.1.8.tgz#87c5a2301f0f6abd6016536b1e4d4f32664f1c49"
+  integrity sha512-FIYNeNNqWsrZif8GVizUohqg7l9pWnUQ1ZrWnecUY27SCCKau4LPJrumogPLFoPbNNsRl1TSo1JQ8tUpkp/MOQ==
+  dependencies:
+    chess.mjs "^1.1.1"
+    cm-pgn "^2.1.4"
+    modrator "^1.1.6"
+
+cm-pgn@^2.1.4:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/cm-pgn/-/cm-pgn-2.1.8.tgz#3695a63796d9680dc2c073eb93693fcdc5f58d4e"
+  integrity sha512-aAhw8KIg4OBpoVANP5O41PcrhskN0AsSEQiLx7MSIoBbjninqJAtsM6RoKbiUYr+pDe9UvuzUyPOz2OTqjAM5Q==
+  dependencies:
+    chess.mjs "^1.2.0"
+    modrator "^1.2.0"
 
 co-body@^6.1.0:
   version "6.1.0"
@@ -6419,6 +6436,11 @@ mocha@^9.1.1:
     yargs "16.2.0"
     yargs-parser "20.2.4"
     yargs-unparser "2.0.0"
+
+modrator@^1.1.6, modrator@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/modrator/-/modrator-1.2.1.tgz#e89fcc51fd449608e30164a01812fdc724aa763e"
+  integrity sha512-c9Fmc6jYd0oD7xVmVQW3z/K26t/PY3nmaSjYJ4K3l+4o5dzfm0IfDqsCz7evEex70wbz/oj5AINYLI6ufFpFWQ==
 
 moo@^0.5.1:
   version "0.5.1"

@@ -1,5 +1,8 @@
 import {LitElement, html, css} from 'lit';
 import {classMap} from 'lit/directives/class-map.js';
+import { Chess } from 'cm-chess/lib/chess.mjs/Chess';
+
+export const EMPTY_BOARD_FEN = '8/8/8/8/8/8/8/8 w - - 0 1';
 
 /**
  * A chessboard component.
@@ -33,6 +36,20 @@ export class ChessBoard extends LitElement {
 
       .black_cell {
         background-color: var(--black-cells-color);
+      }
+
+      .player_turn {
+        border-radius: var(--half-cells-size);
+        width: 95%;
+        height: 95%;
+      }
+
+      .player_turn-white {
+        background-color: white;
+      }
+
+      .player_turn-black {
+        background-color: black;
       }
     `;
   }
@@ -80,6 +97,8 @@ export class ChessBoard extends LitElement {
   constructor() {
     super();
 
+    this._gameLogic = new Chess(EMPTY_BOARD_FEN);
+
     this.style.setProperty('--backgroundColor', 'gray');
     this.style.setProperty('--coordinates-color', 'orange');
 
@@ -88,13 +107,18 @@ export class ChessBoard extends LitElement {
 
     this.style.setProperty('--size', '100px');
     this.style.setProperty('--cells-size', '50px');
+    this.style.setProperty('--half-cells-size', '25px');
     const cellsSize = 50 / 9.0;
     const halfCellsSize = cellsSize / 2.0;
     const coordinatesFontSize = cellsSize * 0.00125;
     this.style.setProperty('--grid-template', `${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px / ${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px`);
     this.style.setProperty('--coordinates-font-size', `${coordinatesFontSize}px`);
+  }
 
-
+  _playerTurn() {
+    const isWhiteTurn = this._gameLogic.turn();
+    const classes = {'player_turn-white': isWhiteTurn, 'player_turn-black': !isWhiteTurn};
+    return html`<div class="player_turn ${classMap(classes)}"></div>`
   }
 
   _cell(rowIndex, colIndex) {
@@ -126,6 +150,7 @@ export class ChessBoard extends LitElement {
       const coordinatesFontSize = cellsSize * 0.425;
       this.style.setProperty('--size', this.size);
       this.style.setProperty('--cells-size', `${cellsSize}${unit}`);
+      this.style.setProperty('--half-cells-size', `${halfCellsSize}${unit}`);
       this.style.setProperty('--grid-template', `${halfCellsSize}${unit} repeat(8, ${cellsSize}${unit}) ${halfCellsSize}${unit} / ${halfCellsSize}${unit} repeat(8, ${cellsSize}${unit}) ${halfCellsSize}${unit}`);
       this.style.setProperty('--coordinates-font-size', `${coordinatesFontSize}${unit}`);
     }
@@ -174,7 +199,7 @@ export class ChessBoard extends LitElement {
         <div class="coordinate">${this.reversed ? 'C' : 'F'}</div>
         <div class="coordinate">${this.reversed ? 'B' : 'G'}</div>
         <div class="coordinate">${this.reversed ? 'A' : 'H'}</div>
-        <div></div>
+        <div>${this._playerTurn()}</div>
 
       </div>
     `;
