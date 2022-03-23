@@ -31,9 +31,9 @@
         
       <h1>API</h1>
       
-        <h2>&lt;my-element></h2>
+        <h2>&lt;loloof64-chessboard></h2>
         <div>
-          An example element.
+          A chessboard component.
         </div>
         
     <h3>Attributes</h3>
@@ -43,11 +43,27 @@
       </tr>
       
         <tr>
-          <td>name</td><td>The name to say "Hello" to.</td><td>string</td><td></td>
+          <td>size</td><td>The common size width/height of the board, in whatever unit you want.</td><td>String</td><td></td>
         </tr>
       
         <tr>
-          <td>count</td><td>The number of times the button has been clicked.</td><td>number</td><td></td>
+          <td>reversed</td><td>Is the black side at the bottom of the board ?</td><td>Boolean</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>backgroundColor</td><td>The background color. Defaults to gray.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>coordinatesColor</td><td>The coordinates color. Defaults to orange.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>whiteCellsColor</td><td>White cells color. Defaults to navajowhite.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>blackCellsColor</td><td>Black cells color. Defaults to peru.</td><td>String</td><td></td>
         </tr>
       
     </table>
@@ -60,11 +76,31 @@
       </tr>
       
         <tr>
-          <td>name</td><td>name</td><td>The name to say "Hello" to.</td><td>string</td><td>'World'</td>
+          <td>_gameLogic</td><td></td><td></td><td></td><td>new Chess(EMPTY_BOARD_FEN)</td>
         </tr>
       
         <tr>
-          <td>count</td><td>count</td><td>The number of times the button has been clicked.</td><td>number</td><td>0</td>
+          <td>size</td><td>size</td><td>The common size width/height of the board, in whatever unit you want.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>reversed</td><td>reversed</td><td>Is the black side at the bottom of the board ?</td><td>Boolean</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>backgroundColor</td><td>backgroundColor</td><td>The background color. Defaults to gray.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>coordinatesColor</td><td>coordinatesColor</td><td>The coordinates color. Defaults to orange.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>whiteCellsColor</td><td>whiteCellsColor</td><td>White cells color. Defaults to navajowhite.</td><td>String</td><td></td>
+        </tr>
+      
+        <tr>
+          <td>blackCellsColor</td><td>blackCellsColor</td><td>Black cells color. Defaults to peru.</td><td>String</td><td></td>
         </tr>
       
     </table>
@@ -77,7 +113,7 @@
       </tr>
       
         <tr>
-          <td>sayHello</td><td>
+          <td>newGame</td><td>
     
     <table>
       <tr>
@@ -85,54 +121,18 @@
       </tr>
       
         <tr>
-          <td>name</td><td>The name to say "Hello" to</td><td>string</td>
+          <td>startPositionFen</td><td>: the initial position in Forsyth-Edwards Notation.</td><td>String</td>
         </tr>
       
     </table>
-  </td><td>Formats a greeting</td><td>string</td>
-        </tr>
-      
-    </table>
-  
-        
-    <h3>Events</h3>
-    <table>
-      <tr>
-        <th>Name</th><th>Description</th>
-      </tr>
-      
-        <tr>
-          <td>count-changed</td><td>Indicates when the count changes</td>
-        </tr>
-      
-    </table>
-      
-        
-    <h3>Slots</h3>
-    <table>
-      <tr>
-        <th>Name</th><th>Description</th>
-      </tr>
-      
-        <tr>
-          <td>(default)</td><td>This element has a slot</td>
-        </tr>
-      
-    </table>
-    
-        
-    <h3>CSS Shadow Parts</h3>
-    <table>
-      <tr>
-        <th>Name</th><th>Description</th>
-      </tr>
-      
-        <tr>
-          <td>button</td><td>The button</td>
+  </td><td>Starts a new game.</td><td></td>
         </tr>
       
     </table>
   
+            
+          
+        
         
         
     

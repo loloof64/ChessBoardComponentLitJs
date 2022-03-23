@@ -88,13 +88,15 @@ export class ChessBoard extends LitElement {
   static get properties() {
     return {
       /**
-       * The common size width/height of the board, in whatever unit you want. Defaults to 100px.
+       * The common size width/height of the board, in whatever unit you want.
+       * @default 100px
        * @type {String}
        */
       size: {type: String},
 
       /**
-       * Is the black side at the bottom of the board ? Defaults to false.
+       * Is the black side at the bottom of the board ?
+       * @default false
        * @type {Boolean}
        */
       reversed: {type: Boolean},
@@ -147,7 +149,7 @@ export class ChessBoard extends LitElement {
   }
 
   /**
-   * Starts a new game
+   * Starts a new game.
    * @param {String} startPositionFen : the initial position in Forsyth-Edwards Notation. 
    */
   newGame(startPositionFen = DEFAULT_POSITION_FEN) {
