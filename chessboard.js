@@ -15,6 +15,7 @@ import bq from './chess_vectors/bq';
 import bk from './chess_vectors/bk';
 
 export const EMPTY_BOARD_FEN = '8/8/8/8/8/8/8/8 w - - 0 1';
+export const DEFAULT_POSITION_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
 /**
  * A chessboard component.
@@ -127,8 +128,7 @@ export class ChessBoard extends LitElement {
   constructor() {
     super();
 
-    const position = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
-    this._gameLogic = new Chess(position);
+    this._gameLogic = new Chess(EMPTY_BOARD_FEN);
 
     this.style.setProperty('--backgroundColor', 'gray');
     this.style.setProperty('--coordinates-color', 'orange');
@@ -144,6 +144,15 @@ export class ChessBoard extends LitElement {
     const coordinatesFontSize = cellsSize * 0.00125;
     this.style.setProperty('--grid-template', `${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px / ${halfCellsSize}px repeat(8, ${cellsSize}px) ${halfCellsSize}px`);
     this.style.setProperty('--coordinates-font-size', `${coordinatesFontSize}px`);
+  }
+
+  /**
+   * Starts a new game
+   * @param {String} startPositionFen : the initial position in Forsyth-Edwards Notation. 
+   */
+  newGame(startPositionFen = DEFAULT_POSITION_FEN) {
+    this._gameLogic = new Chess(startPositionFen);
+    this.requestUpdate();
   }
 
   _coordinatesToAlgebraic({rank, file}) {

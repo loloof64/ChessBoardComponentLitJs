@@ -19,6 +19,7 @@
   <body x-data="{size: '500.30px', reversed: false}">
     <div class="main_zone">
       <loloof64-chessboard 
+      x-ref="board"
       :size="size"
       :reversed="reversed"
       >
@@ -26,6 +27,7 @@
       </loloof64-chessboard>
       <button @click="size = size === '500.30px' ? '10vw' : '500.30px';">Toggle size</button>
       <button @click="reversed = !reversed;">Toggle orientation</button>
+      <button @click="$refs.board.newGame();">New game</button>
     </div>
   </body>
 </html>
