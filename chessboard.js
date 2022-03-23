@@ -1,6 +1,18 @@
-import {LitElement, html, css} from 'lit';
+import {LitElement, html, css, unsafeCSS} from 'lit';
 import {classMap} from 'lit/directives/class-map.js';
 import { Chess } from 'cm-chess/lib/chess.mjs/Chess';
+import wp from './chess_vectors/wp';
+import wn from './chess_vectors/wn';
+import wb from './chess_vectors/wb';
+import wr from './chess_vectors/wr';
+import wq from './chess_vectors/wq';
+import wk from './chess_vectors/wk';
+import bp from './chess_vectors/bp';
+import bn from './chess_vectors/bn';
+import bb from './chess_vectors/bb';
+import br from './chess_vectors/br';
+import bq from './chess_vectors/bq';
+import bk from './chess_vectors/bk';
 
 export const EMPTY_BOARD_FEN = '8/8/8/8/8/8/8/8 w - - 0 1';
 
@@ -30,6 +42,12 @@ export class ChessBoard extends LitElement {
         font-size: var(--coordinates-font-size);
       }
 
+      .cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .white_cell {
         background-color: var(--white-cells-color);
       }
@@ -50,6 +68,11 @@ export class ChessBoard extends LitElement {
 
       .player_turn-black {
         background-color: black;
+      }
+
+      .piece {
+        width: 100%;
+        height: 100%;
       }
     `;
   }
@@ -116,20 +139,48 @@ export class ChessBoard extends LitElement {
     this.style.setProperty('--coordinates-font-size', `${coordinatesFontSize}px`);
   }
 
+  _coordinatesToAlgebraic({rank, file}) {
+    return `${String.fromCharCode('a'.charCodeAt(0) + file)}${String.fromCharCode('1'.charCodeAt(0) + rank)}`;
+  }
+
   _playerTurn() {
     const isWhiteTurn = this._gameLogic.turn() === 'w';
     const classes = {'player_turn-white': isWhiteTurn, 'player_turn-black': !isWhiteTurn};
     return html`<div class="player_turn ${classMap(classes)}"></div>`
   }
 
+  _pieceToImage(piece) {
+    switch(piece.type) {
+      case 'p': return piece.color === 'w' ? wp : bp; 
+      case 'n': return piece.color === 'w' ? wn : bn; 
+      case 'b': return piece.color === 'w' ? wb : bb; 
+      case 'r': return piece.color === 'w' ? wr : br; 
+      case 'q': return piece.color === 'w' ? wq : bq; 
+      case 'k': return piece.color === 'w' ? wk : bk; 
+    }
+  }
+
   _cell(rowIndex, colIndex) {
     const isWhiteCell = (rowIndex + colIndex) %2 == 0;
-    const classes = {'white_cell': isWhiteCell, 'black_cell': !isWhiteCell};
-    return html`<div class=${classMap(classes)}></div>`;
+    const classes = {'white_cell': isWhiteCell, 'black_cell': !isWhiteCell, 'cell': true};
+    const file = this.reversed ? 7-colIndex : colIndex;
+    const rank = this.reversed ? 7-rowIndex : rowIndex;
+    const cellAlgebraic = this._coordinatesToAlgebraic({file, rank});
+    const piece = this._gameLogic.get(cellAlgebraic);
+
+    if (piece) {
+      const image = this._pieceToImage(piece);
+      return html`<div class=${classMap(classes)}>
+        ${image}
+      </div>`;
+    }
+    else {
+      return html`<div class=${classMap(classes)}></div>`;
+    }
   }
 
   _rowCells(rowIndex) {
-    return html`<div class="coordinate">${rowIndex}</div>
+    return html`<div class="coordinate">${rowIndex + 1}</div>
                   ${this.reversed ? this._cell(7-rowIndex, 0) : this._cell(rowIndex, 0)}
                   ${this.reversed ? this._cell(7-rowIndex, 1) : this._cell(rowIndex, 1)}
                   ${this.reversed ? this._cell(7-rowIndex, 2) : this._cell(rowIndex, 2)}
@@ -138,7 +189,7 @@ export class ChessBoard extends LitElement {
                   ${this.reversed ? this._cell(7-rowIndex, 5) : this._cell(rowIndex, 5)}
                   ${this.reversed ? this._cell(7-rowIndex, 6) : this._cell(rowIndex, 6)}
                   ${this.reversed ? this._cell(7-rowIndex, 7) : this._cell(rowIndex, 7)}
-                <div class="coordinate">${rowIndex}</div>`;
+                <div class="coordinate">${rowIndex + 1}</div>`;
   }
 
   updated(changes) {
@@ -188,7 +239,7 @@ export class ChessBoard extends LitElement {
         <div></div>
 
         ${
-          (this.reversed ? [1,2,3,4,5,6,7,8] : [8,7,6,5,4,3,2,1]).map((row) => this._rowCells(row))
+          (this.reversed ? [0,1,2,3,4,5,6,7] : [7,6,5,4,3,2,1,0]).map((row) => this._rowCells(row))
         }
 
         <div></div>
