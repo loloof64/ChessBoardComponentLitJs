@@ -50,6 +50,11 @@ export class ChessBoard extends LitElement {
         height: 100%;
       }
 
+      .cell > svg {
+        width: 100%;
+        height: 100%;
+      }
+
       .white_cell {
         background-color: var(--white-cells-color);
       }
