@@ -97,7 +97,8 @@ export class ChessBoard extends LitElement {
   constructor() {
     super();
 
-    this._gameLogic = new Chess(EMPTY_BOARD_FEN);
+    const position = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
+    this._gameLogic = new Chess(position);
 
     this.style.setProperty('--backgroundColor', 'gray');
     this.style.setProperty('--coordinates-color', 'orange');
@@ -116,7 +117,7 @@ export class ChessBoard extends LitElement {
   }
 
   _playerTurn() {
-    const isWhiteTurn = this._gameLogic.turn();
+    const isWhiteTurn = this._gameLogic.turn() === 'w';
     const classes = {'player_turn-white': isWhiteTurn, 'player_turn-black': !isWhiteTurn};
     return html`<div class="player_turn ${classMap(classes)}"></div>`
   }
